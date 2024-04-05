@@ -18,6 +18,7 @@ public class HomeController {
 		
 		log.info("index() 실행4");
 		log.info("index() 실행3");
+		log.info("index() 실행5");
 		
 		
 		return "home";
