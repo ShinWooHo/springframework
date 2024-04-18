@@ -9,16 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
-  <listener>
+<listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:spring/root/*.xml</param-value>
   </context-param>
- 
- <servlet>
+    <servlet>
     <servlet-name>DispatcherServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
@@ -26,24 +24,45 @@
       <param-value>classpath:spring/dispatcher/*.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
+    
+   	
+    <!--  multipart/form-data를 해석하기위한 설정 
+    <multipart-config>
+     임시 파일이 저장될 폴더의 절대 경로만 가능 
+    	<location>C:/Temp</location>
+    	 파일 크기가 10MB 이하만 허용(1024*1024*10) 
+    	<max-file-size>20971520</max-file-size>
+    	 multipart/form-data 전체 크기가 30M 이하만 허용(1024*1024*30) 
+    	<max-request-size>104857600</max-request-size>
+    	 임시 파일로 저장해야할 파일의 크기 지정(요청 처리가 끝나면 임시 파일 삭제) 
+    	<file-size-threshold>1024</file-size-threshold>
+    </multipart-config> -->
+  
   </servlet>
   <servlet-mapping>
     <servlet-name>DispatcherServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>  
-
-	<filter>
-	    <filter-name>CharacterEncodingFilter</filter-name>
-	    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-	    <init-param>
-	      <param-name>encoding</param-name>
-	      <param-value>UTF-8</param-value>
+   <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
     </init-param>
- 	 </filter>
-	  <filter-mapping>
-	    <filter-name>CharacterEncodingFilter</filter-name>
-	    <url-pattern>/*</url-pattern>  <!-- http://localhost:8080/sptingframework/... 생략 -->
-  	</filter-mapping>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
   
-  
+  <filter>
+    <filter-name>Ch02Filter</filter-name>
+    <filter-class>com.mycompany.springframework.filter.Ch02Filter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Ch02Filter</filter-name>
+    <url-pattern>/ch02/*</url-pattern>
+  </filter-mapping>
+ 
 </web-app>
